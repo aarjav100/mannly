@@ -16,13 +16,14 @@ func ResolveURL(c fiber.Ctx) error {
 	defer rdb.Close()
 
 	val, err := rdb.Get(database.Ctx, url).Result()
-	if err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"error": "Internal Server Error",
-		})
-	} else if err == redis.Nil {
+	if err == redis.Nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
 			"error": "URL not found",
+		})
+	} else if err != nil {
+
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": "Internal Server Error",
 		})
 	}
 
