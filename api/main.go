@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"os"
+	"url-shortener/routes"
 
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/logger"
